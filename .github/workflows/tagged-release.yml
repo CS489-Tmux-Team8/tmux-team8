@@ -101,9 +101,9 @@ jobs:
 
       - name: Create new release issue
         run: |
-          gh label create release
+          gh label create $LABEL
           previous_issue_number=$(gh issue list \
-            --label "release" \
+            --label "$LABEL" \
             --json number \
             --jq '.[0].number')
 
@@ -114,13 +114,14 @@ jobs:
 
           new_issue_url=$(gh issue create \
             --title "$NEW_TAG questions and comments" \
-            --label "release" \
+            --label "$LABEL" \
             --body "$BODY")
 
           echo "ISSUE_URL=$new_issue_url" >> $GITHUB_ENV
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
+          LABEL: release
           BODY: |
             Ask or discuss any quick questions about ${{ env.NEW_TAG }} here please.
             Do not use this issue for bug reports, please open a new issue with full information, see [CONTRIBUTING](${{ env.BASE_URL }}/blob/master/.github/CONTRIBUTING.md).
