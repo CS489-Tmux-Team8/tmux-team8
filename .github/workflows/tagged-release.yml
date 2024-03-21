@@ -65,13 +65,11 @@ jobs:
         run: |
           LAST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
           PREV_TAG=${LAST_TAG:none}
-          if [ "$(git tag | wc -l)"="0" ]
+          if [ "$(git tag | wc -l)" -eq "0" ]
           then
             # get all committed changes
             git log --pretty=format:'%s' > /tmp/tmux-tagged-release
           else
-            PREV_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
-
             # get all committed changes since last release
             git log --pretty=format:'%s' $PREV_TAG..HEAD > /tmp/tmux-tagged-release
           fi
