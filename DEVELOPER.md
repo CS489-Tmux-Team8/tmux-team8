@@ -1,11 +1,10 @@
-Documenting the Existing Release Pipeline
------------------------------------------
+## Documenting the Existing Release Pipeline
 
 ### Overview of the Release Pipeline
 
-Tmux uses GitHub for version control and version releases and is built using GNU Autotools.If issues are found in releases, users may report the issues to GitHub Issues and can also reach out to the mailing list for assistance. 
+Tmux uses GitHub for version control and version releases and is built using GNU Autotools.If issues are found in releases, users may report the issues to GitHub Issues and can also reach out to the mailing list for assistance.
 
-Details of each release pipeline phase can be found in the following sections. 
+Details of each release pipeline phase can be found in the following sections.
 
 ### Integration Phase
 
@@ -17,7 +16,7 @@ The tmux project now uses GitHub exclusively for its code repository and release
 
 In the updated workflow of the tmux project on GitHub, users encountering issues or having suggestions can open an issue, adhering to the guidelines in 'CONTRIBUTING.md'. Contributions to tmux are made through GitHub pull requests.
 
-Once a pull request is created, it can be reviewed by any member of the tmux organization, not limited to specific maintainers. This approach encourages a more collaborative and open review process. The changes are then committed directly to the GitHub repository.
+Once a pull request is created, it can be reviewed by any member of the tmux organization, not limited to specific maintainers. This approach encourages a more collaborative and open review process. However, if one wishes their changes to be reviewed by the maintainers, one can add the dedicated group, code-reviewers, as reviewers of the pull request. Once the changes are ready to be merged, they are committed directly to the GitHub repository.
 
 This direct use of GitHub streamlines the contribution process, enabling a more transparent and immediate integration of changes. Pull requests are merged upon approval, reflecting real-time updates and contributions in the tmux contributor dashboard. This setup allows for a broader range of contributors to actively participate and be recognized in the project.
 
@@ -83,7 +82,7 @@ It is a shell script. It will test the target system's environment (compilers, l
 
 ##### Build Workflow
 
-To build tmux from source files, the following commands need to be run on the terminal:  
+To build tmux from source files, the following commands need to be run on the terminal:
 
 'sh autogen.sh' './configure && make'.
 
@@ -105,7 +104,7 @@ It does three important tasks
 
 'automake' generates 'Makefile.in' template from 'Makefile.am'. 'Makefile.in' is then used by 'configure' to produce the final 'Makefile'. The developers get to work on a high-level and abstract 'Makefile.am' file, and the automake process will ensure that the build process adheres to GNU standards, making software more portable and easier to build across different Unix-like systems.
 
-Step 2: ./configure 
+Step 2: ./configure
 
 This script adjusts the package configuration for the local system, checking for libraries, header files, and functions that are needed. It generates the Makefile from the Makefile.in template according to the local system's configuration.
 
@@ -115,19 +114,19 @@ This command builds the project using the generated Makefile.
 
 ### Deployment Phase
 
-The continuous delivery pipeline is called tagged-release. It gets triggered by any push to the master branch that contains changes. 
+The continuous delivery pipeline is called tagged-release. It gets triggered by any push to the master branch that contains changes.
 
 The deployment phase involves managing the version number. The version number is stored in configure.ac, defined under "AC_INIT([tmux], next-<major.minor.patch>)". It is treated as a single source of truth. In development, the version number is "next-" as a prefix. In the release pipeline, it is expected to make a release without the "next-" prefix, bump up the version, then add the "next-" prefix back for developing the next version. For example, if the current version is "next-3.2.10" before release, the pipeline releases tmux with version "3.2.10" then changes the version to "next-3.2.11" in configure.ac.
 
 After the workflow is triggered, the first thing it does is to set up the environment. It runs on ubuntu-latest and checks out the latest copy of tmux repository. Then, it uses sed to locate the specific line containing the version number, then drops the "next-" prefix.
 
-Then, it installs necessary packages like bison, autotools-dev and build-essential. Most importantly, it downloads the two dependencies that tmux is built on - libevent and ncurses. It utilizes existing scripts to configure, build and make the release tarball for tmux. 
+Then, it installs necessary packages like bison, autotools-dev and build-essential. Most importantly, it downloads the two dependencies that tmux is built on - libevent and ncurses. It utilizes existing scripts to configure, build and make the release tarball for tmux.
 
 The CHANGES file will also be automatically updated to contain the commit messages of the commits included in the release.
 
 Once the above steps are completed, a tag will be created and pushed to GitHub for release. A tarball created using command 'make dist' will then be attached to the release notes of the release. Along with the release, a GitHub issue will be created for users and developers to ask questions about the latest release.
 
-After this, the workflow runs a script to bump up the version, adding one to patch number by default. It writes this new version back to configure.ac, with the "next-" prefix attached back. 
+After this, the workflow runs a script to bump up the version, adding one to patch number by default. It writes this new version back to configure.ac, with the "next-" prefix attached back.
 
 Finally, after a release is made, the released tarball can be found on the [release page](https://github.com/tmux/tmux/releases). Users may install tmux by downloading the source tarball or getting from version control following the steps outlined on the [tmux installation wiki](https://github.com/tmux/tmux/wiki/Installing).
 
