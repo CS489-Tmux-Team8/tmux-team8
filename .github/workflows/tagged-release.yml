@@ -63,6 +63,8 @@ jobs:
       - name: Add to CHANGES
         id: add_to_changes
         run: |
+          LAST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+          PREV_TAG=${LAST_TAG:none}
           if [ "$(git tag | wc -l)"="0" ]
           then
             # get all committed changes
