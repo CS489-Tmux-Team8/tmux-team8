@@ -1,3 +1,13 @@
+CHANGES FROM v1.0.4 to v1.0.5
+
+* Merge pull request #20 from CS489-Tmux-Team8/add-code-reviewers-doc
+
+* [SKIP-RELEASE-TESTS] Add documentation about code-reviewers
+
+* Bump version to next-1.0.5
+
+* Add to CHANGES for new release
+
 CHANGES FROM v1.0.3 to v1.0.4
 
 * [SKIP-RELEASE-TESTS] modify CHANGES
