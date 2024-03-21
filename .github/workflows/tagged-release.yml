@@ -116,10 +116,7 @@ jobs:
 
       - name: Create new release issue
         run: |
-          if [ "$(contains(github.event.issue.labels.*.name, '$LABEL')" ]
-          then
-            gh label create $LABEL
-          fi
+          gh label create -f $LABEL
           previous_issue_number=$(gh issue list \
             --label "$LABEL" \
             --json number \
