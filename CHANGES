@@ -1,3 +1,13 @@
+CHANGES FROM v1.0.3 to v1.0.4
+
+* [SKIP-RELEASE-TESTS] modify CHANGES
+
+* [SKIP-RELEASE-TESTS] modify tagged-release
+
+* Bump version to next-1.0.4
+
+* Add to CHANGES for new release
+
 CHANGES FROM 3.3a to 3.4
 
 - Add options keep-last and keep-group to destroy-unattached to keep the last
