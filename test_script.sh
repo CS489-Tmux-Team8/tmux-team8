@@ -40,5 +40,5 @@ done
  # Calculate the Commit Success Rate
 PASS_RATE=$((TOTAL_PASS_COMMIT / NUM_COMMITS))
 echo "COMMIT SUCCESS RATE: $PASS_RATE%"
-average=$(echo "scale=2; $sum / ($TOTAL_TESTS * $NUM_COMMITS)*100" | bc)
+average=$(echo "scale=2; $sum / ($TOTAL_TESTS * $NUM_COMMITS) * 100" | bc)
 echo "AVERAGE TEST SUCCESS RATE: $average%"
