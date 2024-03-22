@@ -4,6 +4,7 @@ cd regress
 # Number of commits to check out and test, for demo purposes
 NUM_COMMITS=15
 
+sum=0
 # Get the last N commits
 COMMITS=$(git log --format="%H" -n $NUM_COMMITS)
 
@@ -23,6 +24,7 @@ for COMMIT in $COMMITS; do
         # Execute the test script and check if it passes
         if ./$TEST_SCRIPT; then
             PASSED_TESTS=$((PASSED_TESTS + 1))
+            ((sum+=1))
         fi
     done
     # Calculate the pass rate
@@ -38,3 +40,5 @@ done
  # Calculate the Commit Success Rate
 PASS_RATE=$((TOTAL_PASS_COMMIT / NUM_COMMITS))
 echo "COMMIT SUCCESS RATE: $PASS_RATE%"
+average=$(echo "scale=2; $sum / ($TOTAL_TESTS * $NUM_COMMITS)*100" | bc)
+echo "AVERAGE TEST SUCCESS RATE: $average%"
