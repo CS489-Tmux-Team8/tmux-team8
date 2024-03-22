@@ -2,7 +2,7 @@
 
 cd regress
 # Number of commits to check out and test, for demo purposes
-NUM_COMMITS=2
+NUM_COMMITS=15
 
 sum=0
 # Get the last N commits
