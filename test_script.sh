@@ -17,8 +17,6 @@ for COMMIT in $COMMITS; do
     # Checkout the commit
     git checkout $COMMIT
 
-    # Assuming your tests are directly executable and output a clear pass/fail status
-    # You might need to adjust this loop to fit your specific test execution and logging
     for TEST_SCRIPT in *.sh; do
         echo running $TEST_SCRIPT
         chmod +x $TEST_SCRIPT
