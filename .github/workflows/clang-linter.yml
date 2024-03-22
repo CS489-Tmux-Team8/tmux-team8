@@ -1,4 +1,4 @@
-name: C++ Lint with clang-tidy
+name: C Lint with clang-tidy
 
 on:
     push:
