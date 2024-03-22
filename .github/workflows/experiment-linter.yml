@@ -1,4 +1,4 @@
-name: C++ Lint with clang-tidy
+name: clang-tidy experiment
 
 on:
     workflow_dispatch:
