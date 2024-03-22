@@ -31,7 +31,7 @@ jobs:
             - name: Run clang-tidy
               run: |
                   clang-tidy --version
-                  clang-tidy compat/imsg.c -p $(pwd)
+                  clang-tidy compat/imsg.c -p $(pwd) --warnings-as-errors=*
 
     comment-on-failure:
         name: Comment on PR if clang-tidy fails
