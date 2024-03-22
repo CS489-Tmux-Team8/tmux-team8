@@ -96,7 +96,17 @@ $TMUX send-keys -X next-word
 $TMUX send-keys -X begin-selection
 $TMUX send-keys -X next-word-end
 $TMUX send-keys -X copy-selection
-[ "$($TMUX show-buffer)" = "line..." ] || exit 1
+if [ "$($TMUX show-buffer)" = "line..." ]
+then 
+      actual=$($TMUX show-buffer)
+      expected=$(printf "words\n        Indented")
+
+      echo "actual: "
+      echo $actual
+      echo "expected: "
+      echo $expected
+      exit 1
+fi
 
 # Test that `previous-word` and `next-word` treat periods as letters.
 $TMUX send-keys -X previous-word
