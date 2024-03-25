@@ -1,9 +1,9 @@
-name: "Documentation-Review-Reminder"
+name: Documentation Review Reminder
 
 on:
   schedule:
     # Schedule to run at 00:00 on the 1st day of January and July (every 6 months)
-    - cron: '0 0 1 1,7 *'
+    - cron: "0 0 1 1,7 *"
   workflow_dispatch:
 
 jobs:
@@ -12,15 +12,15 @@ jobs:
 
     permissions:
       issues: write
-      
+
     steps:
-      - name: "Checkout source code"
+      - name: Checkout source code
         uses: "actions/checkout@v2.3.4"
         with:
           lfs: true
           fetch-depth: 0
-    
-      - name: Create Documentation Review Issue
+
+      - name: Create documentation review issue
         run: |
           new_issue_url=$(gh issue create \
             --title "Biannual Documentation Review" \
