@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Install dependencies for Linux
         if: runner.os == 'Linux'
         run: |
@@ -23,7 +23,7 @@ jobs:
             sudo apt-get -y install musl-dev \
                         musl-tools
           fi
-          
+
       # Add steps for other operating systems if needed, similar to the Linux steps above.
       - name: Build tmux
         run: |
@@ -32,7 +32,7 @@ jobs:
           make
 
       # Add additional steps for running tests if applicable.
-      - name: Run Tests
+      - name: Run tests
         working-directory: ./regress
         run: |
           for test_script in *.sh; do
@@ -40,9 +40,3 @@ jobs:
             echo Running test $test_script
             ./$test_script
           done
-
-
-      
-
-      
-
